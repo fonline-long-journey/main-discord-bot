@@ -1,5 +1,14 @@
 {
 	"discord" : { 
-	  "token"  : "your-discord-id-here"
+	  "token"  : "your-discord-token"
+	},
+	"fonline" : {
+		"host": "localhost",
+		"port": "your-server-port",
+	},
+	"fonline-admin":{
+		"host": "localhost",
+		"port": "your-admin-port",
+		"password": "admin-password"
 	}
 }

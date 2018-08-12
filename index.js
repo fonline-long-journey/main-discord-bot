@@ -51,8 +51,14 @@ app.bot.on("guildDelete", guild => {
 	app.bot.emit('init',[guild])
 })
 
+var requestOverflow = 0;
+setInterval(_=>{
+	requestOverflow--;
+},1500);
+
 // Processing prefixed messages
 app.bot.on('message', async message => {
+	if(requestOverflow++ > 0) return;
 	if(app.config.discord.prefixes) 
 		for(var prefix in app.config.discord.prefixes)
 			if(app.config.discord.prefixes[prefix] && message.content.startsWith(prefix))
