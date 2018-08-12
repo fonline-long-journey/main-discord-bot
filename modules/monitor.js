@@ -12,7 +12,7 @@ module.exports = app => {
 		// Консольные команды
 		switch(message.content){
 			case "!помощь":
-				result = "\n";
+				result = "\nОкей, доступные команды:";
 				for(var command in app.config.discord.help){
 					let row = `\n${command} - ${app.config.discord.help[command]}`;
 					if( (message.length + row.length) >= 1800 ){
