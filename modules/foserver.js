@@ -46,6 +46,21 @@ module.exports = app => {
       });
     }
     
+    // Статус сервера в статус бота
+    setInterval(async _=>{
+        var result = (await askServer('~gameinfo 1',1));
+    	var count = +result.replace(/[^\d]/g,'');
+    	if(count){
+    	    app.bot.user.setStatus('online');
+    	    var players = '';
+    	    app.bot.user.setActivity(`за ${count} ${count>1?'игроками':'игроком'}`,{type:'WATCHING'});    
+    	} else {
+    	    app.bot.user.setStatus('dnd');
+    	    app.bot.user.setActivity(false);    
+    	}
+        console.log('Server status',count);    	
+    },15000)
+    
 	app.config.discord.prefixes['?'] = true;
 	app.config.discord.help['?статус'] = "запрашивает статус сервера";
 	
