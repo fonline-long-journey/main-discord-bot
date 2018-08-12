@@ -13,7 +13,7 @@ app.bot = new $discord.Client();
 
 // Load configuration
 app.config = require('./config.json');
-app.config.discord.prefixes || (app.config.discord.prefixes = []);
+app.config.discord.prefixes || (app.config.discord.prefixes = {});
 
 // App start timestamp
 app.timestamp = +Date();
@@ -47,14 +47,15 @@ app.bot.on('guildCreate', guild => {
 
 app.bot.on("guildDelete", guild => {
 	console.log(`Removed & DN for room ${guild.name} #${guild.id}`);
+	app.bot.emit('init',[guild])
 })
 
 // Processing prefixed messages
 app.bot.on('message', async message => {
 	if(app.config.discord.prefixes) 
-		for(var id in app.config.discord.prefixes)
-			if(message.content.startsWith(app.config.discord.prefixes[id]))
-				if( await app.bot.emit(`message:${app.config.discord.prefixes[id]}`,message) ) return;
+		for(var prefix in app.config.discord.prefixes)
+			if(app.config.discord.prefixes[prefix] && message.content.startsWith(prefix))
+				await app.bot.emit(`message:${prefix}`,message);
 })
 
 // Connect to discord
