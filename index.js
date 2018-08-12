@@ -14,6 +14,7 @@ app.bot = new $discord.Client();
 // Load configuration
 app.config = require('./config.json');
 app.config.discord.prefixes || (app.config.discord.prefixes = {});
+app.config.discord.help || (app.config.discord.help = {});
 
 // App start timestamp
 app.timestamp = +Date();

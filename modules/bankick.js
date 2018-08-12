@@ -1,5 +1,7 @@
 module.exports = app => {
 	app.config.discord.prefixes['!'] = true;
+	app.config.discord.help['!бан @usertag'] = "забанить упомянутого в сообщении пользователя";
+	app.config.discord.help['!кик @usertag'] = "кикнуть упомянутого в сообщении пользователя";
 
 	app.bot.on('message:!', async message	=>	{
 		// Консольные команды
@@ -20,7 +22,7 @@ module.exports = app => {
 				if(!target)
 					return message.reply('@упомяните того, кого хотите кикнуть...');
 				if(!target.kickable)
-					return message.reply('У меня недостаточно прав на совершение такого действия');
+					return message.reply(`У меня недостаточно прав на совершение такого действия над ${target.username}`);
 				await member.kick().catch(error => message.reply(`, не выходит: ${error}`));
 				return message.reply('Готово');
 		}
