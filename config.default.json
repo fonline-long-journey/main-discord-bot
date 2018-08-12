@@ -1,4 +1,5 @@
-{ 
-  "token"  : "insert-your-discord-api-key-here",
-  "prefix" : "!"
+{
+	"discord" : { 
+	  "token"  : "your-discord-id-here"
+	}
 }
